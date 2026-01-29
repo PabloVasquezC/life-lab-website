@@ -45,7 +45,7 @@ export function Header() {
                 src="/images/lifelab-logo.png"
                 alt="Life Lab Logo"
                 fill
-                className="object-contain"
+                className="object-contain rounded-full"
               />
             </div>
             <div className="flex flex-col">
