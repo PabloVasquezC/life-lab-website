@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Menu, X, Phone, Instagram } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
@@ -30,22 +31,22 @@ export function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? "bg-background/95 backdrop-blur-md border-b border-border"
+        : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="#inicio" className="flex items-center gap-3">
-            <div className="relative">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <span className="font-[var(--font-display)] text-2xl text-primary-foreground tracking-wider">
-                  L
-                </span>
-              </div>
+            <div className="relative w-12 h-12">
+              <Image
+                src="/images/lifelab-logo.png"
+                alt="Life Lab Logo"
+                fill
+                className="object-contain"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-[var(--font-display)] text-xl tracking-wider text-foreground">

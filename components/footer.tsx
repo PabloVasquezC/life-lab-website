@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Instagram, Phone, Mail, MapPin } from "lucide-react";
 
 const quickLinks = [
@@ -32,10 +33,13 @@ export function Footer() {
             viewport={{ once: true }}
           >
             <Link href="#inicio" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <span className="font-[var(--font-display)] text-2xl text-primary-foreground tracking-wider">
-                  L
-                </span>
+              <div className="relative w-16 h-16">
+                <Image
+                  src="/images/lifelab-logo.png"
+                  alt="Life Lab Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-[var(--font-display)] text-xl tracking-wider text-foreground">

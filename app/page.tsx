@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { GallerySection } from "@/components/gallery-section";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <HeroSection />
       <ServicesSection />
       <AboutSection />
+      <GallerySection />
       <ContactSection />
       <Footer />
       <WhatsAppButton />
