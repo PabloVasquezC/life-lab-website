@@ -6,6 +6,7 @@ import { ContactSection } from "@/components/contact-section";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { GallerySection } from "@/components/gallery-section";
+import { N8nChat } from "@/components/N8n";
 
 export default function Home() {
   return (
@@ -17,7 +18,8 @@ export default function Home() {
       <GallerySection />
       <ContactSection />
       <Footer />
-      <WhatsAppButton />
+      {/* <WhatsAppButton /> */}
+      <N8nChat />
     </main>
   );
 }
