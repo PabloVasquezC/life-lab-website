@@ -19,7 +19,7 @@ const services = [
     title: "Gimnasio",
     description:
       "Equipamiento de última generación y espacios diseñados para optimizar tu entrenamiento. Ambiente motivador para alcanzar tus metas.",
-    image: "/images/training.jpg",
+    image: "/images/training-new.png",
     features: ["Equipos modernos", "Zonas especializadas", "Horarios flexibles"],
   },
   {
@@ -27,7 +27,7 @@ const services = [
     title: "Kinesiología",
     description:
       "Rehabilitación y tratamiento profesional para lesiones deportivas y condiciones crónicas. Recupera tu movilidad y calidad de vida.",
-    image: "/images/kinesiology.jpg",
+    image: "/images/kinesiology-new.png",
     features: [
       "Rehabilitación deportiva",
       "Tratamiento de lesiones",
@@ -39,7 +39,7 @@ const services = [
     title: "Nutrición",
     description:
       "Planes nutricionales personalizados para complementar tu entrenamiento. Alimentación inteligente para resultados óptimos.",
-    image: "/images/nutrition.jpg",
+    image: "/images/nutrition-new.png",
     features: ["Planes personalizados", "Control de peso", "Suplementación"],
   },
   {
@@ -47,7 +47,7 @@ const services = [
     title: "Entrenamiento Personalizado",
     description:
       "Programas de entrenamiento diseñados específicamente para ti. Seguimiento continuo y ajustes para maximizar resultados.",
-    image: "/images/hero-gym.jpg",
+    image: "/images/hero-new.png",
     features: ["Programas a medida", "Seguimiento continuo", "Resultados medibles"],
   },
 ];

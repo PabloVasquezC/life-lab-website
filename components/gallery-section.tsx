@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const images = [
-  "/images/foto1.png",
-  "/images/foto2.png",
-  "/images/foto3.png",
-  "/images/foto4.png",
-  "/images/foto5.png",
-  "/images/foto6.png",
+  "/images/gallery-1.png",
+  "/images/gallery-2.png",
+  "/images/gallery-3.png",
+  "/images/gallery-4.png",
+  "/images/gallery-5.png",
+  "/images/gallery-6.png",
 ];
 
 export function GallerySection() {
