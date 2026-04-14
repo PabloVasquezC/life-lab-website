@@ -1,0 +1,255 @@
+[
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "subtitle",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "backgroundImage",
+        "type": "image"
+      },
+      {
+        "name": "ctaText",
+        "type": "string",
+        "title": "CTA Button Text"
+      },
+      {
+        "name": "ctaLink",
+        "type": "string",
+        "title": "CTA Button Link"
+      }
+    ],
+    "name": "hero",
+    "type": "document",
+    "title": "Hero Section"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Main Image"
+      },
+      {
+        "description": "Lucide icon name (e.g., Dumbbell, Heart, Apple)",
+        "name": "icon",
+        "type": "string",
+        "title": "Icon Name"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "features",
+        "type": "array"
+      },
+      {
+        "name": "order",
+        "type": "number"
+      }
+    ],
+    "name": "service",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "icon",
+                "type": "string"
+              },
+              {
+                "name": "value",
+                "type": "string"
+              },
+              {
+                "name": "label",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "stats",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "name": "description",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "values",
+        "type": "array",
+        "title": "Our Values"
+      }
+    ],
+    "name": "about",
+    "type": "document",
+    "title": "About Section"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "name": "order",
+        "type": "number"
+      }
+    ],
+    "name": "gallery",
+    "type": "document",
+    "title": "Gallery Image"
+  },
+  {
+    "fields": [
+      {
+        "name": "siteName",
+        "type": "string"
+      },
+      {
+        "description": "Format: +569XXXXXXXX",
+        "name": "whatsapp",
+        "type": "string",
+        "title": "WhatsApp Number"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "title": "Phone Number"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "title": "Email Address"
+      },
+      {
+        "name": "address",
+        "type": "string",
+        "title": "Physical Address"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "instagram",
+        "type": "url",
+        "title": "Instagram URL"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "day",
+                "type": "string",
+                "title": "Day(s)"
+              },
+              {
+                "name": "hours",
+                "type": "string"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "schedule",
+        "type": "array",
+        "title": "Opening Hours"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": "SEO Title"
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "title": "Meta Description"
+          }
+        ],
+        "name": "seo",
+        "type": "object",
+        "title": "SEO Settings"
+      }
+    ],
+    "name": "settings",
+    "type": "document",
+    "title": "Site Settings"
+  }
+]
