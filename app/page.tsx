@@ -18,6 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+export const revalidate = 5; // revalidate every 5 seconds
+
+
 export default async function Home() {
   const [
     { data: hero },
