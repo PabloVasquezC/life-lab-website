@@ -2,7 +2,6 @@ import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Inter, Bebas_Neue } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { SanityLive } from "@/sanity/lib/live"
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -41,7 +40,6 @@ export default function RootLayout({
     <html lang="es" className="dark">
       <body className={`${inter.variable} ${bebasNeue.variable} font-sans antialiased`}>
         {children}
-        <SanityLive />
         <Analytics />
       </body>
     </html>
