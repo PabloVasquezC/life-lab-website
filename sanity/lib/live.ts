@@ -6,10 +6,7 @@ import { client } from './client'
 import { token } from '../env'
 
 export const { sanityFetch, SanityLive } = defineLive({
-  client: client.withConfig({ 
-    // Live content is even faster with stega enabled
-    stega: true 
-  }),
+  client,
   serverToken: token,
   browserToken: token,
 });
