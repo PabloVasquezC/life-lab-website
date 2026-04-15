@@ -4,6 +4,7 @@ export const apiVersion =
 export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'xo8vujc0'
 export const production = dataset === 'production'
+export const token = process.env.SANITY_API_TOKEN
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
