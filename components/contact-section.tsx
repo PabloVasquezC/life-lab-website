@@ -13,42 +13,55 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    label: "Dirección",
-    value: "Braulio Arenas 760, Curicó, Chile",
-    href: "https://www.google.com/maps/search/?api=1&query=Braulio+Arenas+760+Curicó+Chile",
-  },
-  {
-    icon: Phone,
-    label: "Teléfono",
-    value: "+56 9 2621 9977",
-    href: "tel:+56926219977",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "centrolifelab.spa@gmail.com",
-    href: "mailto:centrolifelab.spa@gmail.com",
-  },
-  {
-    icon: Instagram,
-    label: "Instagram",
-    value: "@centrolifelab",
-    href: "https://www.instagram.com/centrolifelab/",
-  },
-];
+interface Settings {
+  siteName: string;
+  whatsapp: string;
+  phone: string;
+  email: string;
+  address: string;
+  instagram: string;
+  schedule: { day: string; hours: string }[];
+  seo: { title: string; description: string };
+}
 
-const scheduleInfo = [
-  { day: "Lunes a Viernes", hours: "6:00 AM - 10:00 PM" },
-  { day: "Sábado", hours: "8:00 AM - 2:00 PM" },
-  { day: "Domingo", hours: "Cerrado" },
-];
-
-export function ContactSection() {
+export function ContactSection({ settings }: { settings: Settings }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const contactItems = [
+    {
+      icon: MapPin,
+      label: "Dirección",
+      value: settings?.address || "Braulio Arenas 760, Curicó, Chile",
+      href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings?.address || "Braulio Arenas 760, Curicó, Chile")}`,
+    },
+    {
+      icon: Phone,
+      label: "Teléfono",
+      value: settings?.phone || "+56 9 2621 9977",
+      href: `tel:${(settings?.phone || "+56926219977").replace(/\s/g, "")}`,
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: settings?.email || "centrolifelab.spa@gmail.com",
+      href: `mailto:${settings?.email || "centrolifelab.spa@gmail.com"}`,
+    },
+    {
+      icon: Instagram,
+      label: "Instagram",
+      value: settings?.instagram ? "@" + settings.instagram.split("/").filter(Boolean).pop() : "@centrolifelab",
+      href: settings?.instagram || "https://www.instagram.com/centrolifelab/",
+    },
+  ];
+
+  const scheduleInfo = settings?.schedule || [
+    { day: "Lunes a Viernes", hours: "6:00 AM - 10:00 PM" },
+    { day: "Sábado", hours: "8:00 AM - 2:00 PM" },
+    { day: "Domingo", hours: "Cerrado" },
+  ];
+
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${settings?.whatsapp || "+56926219977"}&text=Hola!%20Quiero%20más%20información%20sobre%20Life%20Lab`;
 
   return (
     <section
@@ -94,7 +107,7 @@ export function ContactSection() {
                 INFORMACIÓN DE CONTACTO
               </h3>
               <div className="space-y-4">
-                {contactInfo.map((item) => (
+                {contactItems.map((item) => (
                   <Link
                     key={item.label}
                     href={item.href}
@@ -127,9 +140,9 @@ export function ContactSection() {
                 </h3>
               </div>
               <div className="space-y-3">
-                {scheduleInfo.map((item) => (
+                {scheduleInfo.map((item, index) => (
                   <div
-                    key={item.day}
+                    key={`${item.day}-${index}`}
                     className="flex items-center justify-between py-3 border-b border-border last:border-0"
                   >
                     <span className="text-foreground">{item.day}</span>
@@ -162,7 +175,7 @@ export function ContactSection() {
               <div className="space-y-4">
                 <Button size="lg" className="w-full text-lg py-6" asChild>
                   <Link
-                    href="https://api.whatsapp.com/send?phone=+56926219977&text=Hola!%20Quiero%20más%20información%20sobre%20Life%20Lab"
+                    href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -176,7 +189,7 @@ export function ContactSection() {
                   className="w-full text-lg py-6 bg-transparent"
                   asChild
                 >
-                  <Link href="tel:+56926219977">
+                  <Link href={`tel:${(settings?.phone || "+56926219977").replace(/\s/g, "")}`}>
                     <Phone className="w-5 h-5 mr-2" />
                     Llamar Ahora
                   </Link>
@@ -185,22 +198,25 @@ export function ContactSection() {
             </div>
 
             {/* Map Placeholder */}
-            <div className="mt-6 h-48 rounded-2xl overflow-hidden border border-border">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.8!2d-71.24!3d-34.98!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDU4JzQ4LjAiUyA3McKwMTQnMjQuMCJX!5e0!3m2!1ses!2scl!4v1"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Ubicación de Life Lab"
-                className="grayscale hover:grayscale-0 transition-all duration-500"
-              />
-            </div>
+            {settings?.address && (
+              <div className="mt-6 h-48 rounded-2xl overflow-hidden border border-border">
+                <iframe
+                  src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(settings.address)}`}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Ubicación de Life Lab"
+                  className="grayscale hover:grayscale-0 transition-all duration-500"
+                />
+              </div>
+            )}
           </motion.div>
         </div>
       </div>
     </section>
   );
 }
+

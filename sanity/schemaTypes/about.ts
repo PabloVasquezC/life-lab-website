@@ -2,44 +2,44 @@ import { defineField, defineType } from 'sanity'
 
 export const aboutType = defineType({
   name: 'about',
-  title: 'About Section',
+  title: 'Sobre Nosotros',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Título',
       type: 'string',
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Descripción',
       type: 'text',
     }),
     defineField({
       name: 'stats',
-      title: 'Stats',
+      title: 'Estadísticas',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'icon', title: 'Icon', type: 'string' },
-            { name: 'value', title: 'Value', type: 'string' },
-            { name: 'label', title: 'Label', type: 'string' },
+            { name: 'icon', title: 'Icono', type: 'string' },
+            { name: 'value', title: 'Valor', type: 'string' },
+            { name: 'label', title: 'Etiqueta', type: 'string' },
           ],
         },
       ],
     }),
     defineField({
       name: 'values',
-      title: 'Our Values',
+      title: 'Nuestros Valores',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'title', title: 'Title', type: 'string' },
-            { name: 'description', title: 'Description', type: 'text' },
+            { name: 'title', title: 'Título', type: 'string' },
+            { name: 'description', title: 'Descripción', type: 'text' },
           ],
         },
       ],

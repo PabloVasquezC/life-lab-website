@@ -2,17 +2,16 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
-const images = [
-  "/images/gallery-1.png",
-  "/images/gallery-2.png",
-  "/images/gallery-3.png",
-  "/images/gallery-4.png",
-  "/images/gallery-5.png",
-  "/images/gallery-6.png",
-];
+interface GalleryImage {
+  title: string;
+  image: any;
+}
 
-export function GallerySection() {
+export function GallerySection({ data }: { data: GalleryImage[] }) {
+  const images = data || [];
+
   return (
     <section className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
@@ -32,7 +31,7 @@ export function GallerySection() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((src, index) => (
+          {images.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -42,8 +41,8 @@ export function GallerySection() {
               className="relative aspect-square rounded-2xl overflow-hidden group"
             >
               <Image
-                src={src}
-                alt={`Galería Life Lab ${index + 1}`}
+                src={item.image ? urlFor(item.image).url() : "/placeholder.svg"}
+                alt={item.title || `Galería Life Lab ${index + 1}`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -55,3 +54,4 @@ export function GallerySection() {
     </section>
   );
 }
+

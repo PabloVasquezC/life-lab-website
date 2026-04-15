@@ -5,6 +5,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Phone, Mail, MapPin } from "lucide-react";
 
+interface Settings {
+  siteName: string;
+  whatsapp: string;
+  phone: string;
+  email: string;
+  address: string;
+  instagram: string;
+  schedule: { day: string; hours: string }[];
+  seo: { title: string; description: string };
+}
+
 const quickLinks = [
   { name: "Inicio", href: "#inicio" },
   { name: "Servicios", href: "#servicios" },
@@ -20,7 +31,14 @@ const services = [
   "Tratamiento ECNT",
 ];
 
-export function Footer() {
+export function Footer({ settings }: { settings: Settings }) {
+  const siteName = settings?.siteName || "Life Lab";
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${settings?.whatsapp || "+56926219977"}`;
+  const instagramLink = settings?.instagram || "https://www.instagram.com/centrolifelab/";
+  const email = settings?.email || "centrolifelab.spa@gmail.com";
+  const phone = settings?.phone || "+56 9 2621 9977";
+  const address = settings?.address || "Braulio Arenas 760, Curicó, Chile";
+
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 lg:px-8 py-16">
@@ -36,14 +54,14 @@ export function Footer() {
               <div className="relative w-16 h-16">
                 <Image
                   src="/images/lifelab-logo.png"
-                  alt="Life Lab Logo"
+                  alt={`${siteName} Logo`}
                   fill
                   className="object-contain rounded-full"
                 />
               </div>
               <div className="flex flex-col">
                 <span className="font-[var(--font-display)] text-xl tracking-wider text-foreground">
-                  LIFE LAB
+                  {siteName.toUpperCase()}
                 </span>
               </div>
             </Link>
@@ -53,7 +71,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="https://www.instagram.com/centrolifelab/"
+                href={instagramLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
@@ -61,7 +79,7 @@ export function Footer() {
                 <Instagram className="w-5 h-5" />
               </Link>
               <Link
-                href="https://api.whatsapp.com/send?phone=+56926219977"
+                href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
@@ -69,7 +87,7 @@ export function Footer() {
                 <Phone className="w-5 h-5" />
               </Link>
               <Link
-                href="mailto:centrolifelab.spa@gmail.com"
+                href={`mailto:${email}`}
                 className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
               >
                 <Mail className="w-5 h-5" />
@@ -134,25 +152,25 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <span className="text-muted-foreground">
-                  Braulio Arenas 760, Curicó, Chile
+                  {address}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0" />
                 <Link
-                  href="tel:+56926219977"
+                  href={`tel:${phone.replace(/\s/g, "")}`}
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  +56 9 2621 9977
+                  {phone}
                 </Link>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
                 <Link
-                  href="mailto:centrolifelab.spa@gmail.com"
+                  href={`mailto:${email}`}
                   className="text-muted-foreground hover:text-primary transition-colors text-sm"
                 >
-                  centrolifelab.spa@gmail.com
+                  {email}
                 </Link>
               </li>
             </ul>
@@ -168,7 +186,7 @@ export function Footer() {
           className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            © {new Date().getFullYear()} Life Lab. Todos los derechos
+            © {new Date().getFullYear()} {siteName}. Todos los derechos
             reservados.
           </p>
           <p className="text-sm text-muted-foreground">Curicó, Chile</p>
@@ -177,3 +195,4 @@ export function Footer() {
     </footer>
   );
 }
+

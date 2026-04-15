@@ -2,22 +2,22 @@ import { defineField, defineType } from 'sanity'
 
 export const serviceType = defineType({
   name: 'service',
-  title: 'Service',
+  title: 'Servicios',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Título',
       type: 'string',
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Descripción',
       type: 'text',
     }),
     defineField({
       name: 'image',
-      title: 'Main Image',
+      title: 'Imagen',
       type: 'image',
       options: {
         hotspot: true,
@@ -25,19 +25,19 @@ export const serviceType = defineType({
     }),
     defineField({
       name: 'icon',
-      title: 'Icon Name',
-      description: 'Lucide icon name (e.g., Dumbbell, Heart, Apple)',
+      title: 'Icono',
+      description: 'Nombre del icono de Lucide (ej. Dumbbell, Heart, Apple)',
       type: 'string',
     }),
     defineField({
       name: 'features',
-      title: 'Features',
+      title: 'Características',
       type: 'array',
       of: [{ type: 'string' }],
     }),
     defineField({
       name: 'order',
-      title: 'Order',
+      title: 'Orden',
       type: 'number',
     }),
   ],

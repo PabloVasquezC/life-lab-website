@@ -5,8 +5,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Dumbbell, Heart, Apple } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { urlFor } from "@/sanity/lib/image";
 
-export function HeroSection() {
+interface HeroData {
+  title: string;
+  subtitle: string;
+  description: string;
+  backgroundImage: any;
+  ctaText: string;
+  ctaLink: string;
+}
+
+export function HeroSection({ data }: { data: HeroData }) {
+  // Use Sanity data if available, otherwise fallback to defaults
+  const content = {
+    title: data?.title || "LIFE LAB",
+    subtitle: data?.subtitle || "CENTRO DE ENTRENAMIENTO & SALUD",
+    description: data?.description || "Entrenamiento personalizado y asesorías expertas. Transforma tu vida con nuestro equipo de profesionales en fitness, kinesiología y nutrición.",
+    image: data?.backgroundImage ? urlFor(data.backgroundImage).url() : "/images/hero-new.png",
+    ctaText: data?.ctaText || "Comenzar Ahora",
+    ctaLink: data?.ctaLink || "https://api.whatsapp.com/send?phone=+56926219977&text=Hola!%20Quiero%20más%20información",
+  };
+
   return (
     <section
       id="inicio"
@@ -15,7 +35,7 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-new.png"
+          src={content.image}
           alt="Life Lab Gym Interior"
           fill
           className="object-cover"
@@ -48,7 +68,13 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-[var(--font-display)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground mb-6 tracking-wide"
           >
-            <span className="text-primary">LIFE</span> LAB
+            {content.title === "LIFE LAB" ? (
+              <>
+                <span className="text-primary">LIFE</span> LAB
+              </>
+            ) : (
+              content.title
+            )}
           </motion.h1>
 
           <motion.p
@@ -57,7 +83,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-[var(--font-display)] text-2xl sm:text-3xl md:text-4xl text-muted-foreground tracking-wider mb-4"
           >
-            CENTRO DE ENTRENAMIENTO & SALUD
+            {content.subtitle}
           </motion.p>
 
           <motion.p
@@ -66,9 +92,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Entrenamiento personalizado y asesorías expertas. Transforma tu vida
-            con nuestro equipo de profesionales en fitness, kinesiología y
-            nutrición.
+            {content.description}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -80,11 +104,11 @@ export function HeroSection() {
           >
             <Button size="lg" asChild className="text-lg px-8">
               <Link
-                href="https://api.whatsapp.com/send?phone=+56926219977&text=Hola!%20Quiero%20más%20información"
+                href={content.ctaLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Comenzar Ahora
+                {content.ctaText}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </Button>
@@ -143,3 +167,4 @@ export function HeroSection() {
     </section>
   );
 }
+

@@ -4,57 +4,24 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Dumbbell,
-  Heart,
-  Apple,
-  TrendingUp,
-  ArrowRight,
-} from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { urlFor } from "@/sanity/lib/image";
 
-const services = [
-  {
-    icon: Dumbbell,
-    title: "Gimnasio",
-    description:
-      "Equipamiento de última generación y espacios diseñados para optimizar tu entrenamiento. Ambiente motivador para alcanzar tus metas.",
-    image: "/images/training-new.png",
-    features: ["Equipos modernos", "Zonas especializadas", "Horarios flexibles"],
-  },
-  {
-    icon: Heart,
-    title: "Kinesiología",
-    description:
-      "Rehabilitación y tratamiento profesional para lesiones deportivas y condiciones crónicas. Recupera tu movilidad y calidad de vida.",
-    image: "/images/kinesiology-new.png",
-    features: [
-      "Rehabilitación deportiva",
-      "Tratamiento de lesiones",
-      "Terapia manual",
-    ],
-  },
-  {
-    icon: Apple,
-    title: "Nutrición",
-    description:
-      "Planes nutricionales personalizados para complementar tu entrenamiento. Alimentación inteligente para resultados óptimos.",
-    image: "/images/nutrition-new.png",
-    features: ["Planes personalizados", "Control de peso", "Suplementación"],
-  },
-  {
-    icon: TrendingUp,
-    title: "Entrenamiento Personalizado",
-    description:
-      "Programas de entrenamiento diseñados específicamente para ti. Seguimiento continuo y ajustes para maximizar resultados.",
-    image: "/images/hero-new.png",
-    features: ["Programas a medida", "Seguimiento continuo", "Resultados medibles"],
-  },
-];
+interface Service {
+  title: string;
+  description: string;
+  image: any;
+  icon: string;
+  features: string[];
+}
 
-export function ServicesSection() {
+export function ServicesSection({ data }: { data: Service[] }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const services = data || [];
 
   return (
     <section
@@ -90,67 +57,71 @@ export function ServicesSection() {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/50 transition-all duration-500"
-            >
-              {/* Image */}
-              <div className="relative h-64 overflow-hidden">
-                <Image
-                  src={service.image || "/placeholder.svg"}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-                <div className="absolute top-4 left-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/90 flex items-center justify-center backdrop-blur-sm">
-                    <service.icon className="w-6 h-6 text-primary-foreground" />
+          {services.map((service, index) => {
+            const Icon = (LucideIcons as any)[service.icon] || LucideIcons.Dumbbell;
+            
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group relative rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/50 transition-all duration-500"
+              >
+                {/* Image */}
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={service.image ? urlFor(service.image).url() : "/placeholder.svg"}
+                    alt={service.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                  <div className="absolute top-4 left-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/90 flex items-center justify-center backdrop-blur-sm">
+                      <Icon className="w-6 h-6 text-primary-foreground" />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Content */}
-              <div className="p-6 lg:p-8">
-                <h3 className="font-[var(--font-display)] text-2xl lg:text-3xl text-foreground mb-3 tracking-wide">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground mb-6">{service.description}</p>
+                {/* Content */}
+                <div className="p-6 lg:p-8">
+                  <h3 className="font-[var(--font-display)] text-2xl lg:text-3xl text-foreground mb-3 tracking-wide">
+                    {service.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-6">{service.description}</p>
 
-                {/* Features */}
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center gap-2 text-sm text-foreground"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                  {/* Features */}
+                  <ul className="space-y-2 mb-6">
+                    {service.features?.map((feature) => (
+                      <li
+                        key={feature}
+                        className="flex items-center gap-2 text-sm text-foreground"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
 
-                <Button
-                  variant="ghost"
-                  className="group/btn p-0 h-auto text-primary hover:text-accent hover:bg-transparent"
-                  asChild
-                >
-                  <Link
-                    href="https://api.whatsapp.com/send?phone=+56926219977&text=Hola!%20Quiero%20más%20información"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Button
+                    variant="ghost"
+                    className="group/btn p-0 h-auto text-primary hover:text-accent hover:bg-transparent"
+                    asChild
                   >
-                    Más información
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
-          ))}
+                    <Link
+                      href="https://api.whatsapp.com/send?phone=+56926219977&text=Hola!%20Quiero%20más%20información"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Más información
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* ECNT Banner */}
@@ -184,6 +155,8 @@ export function ServicesSection() {
           </div>
         </motion.div>
       </div>
+      
     </section>
   );
 }
+

@@ -2,61 +2,61 @@ import { defineField, defineType } from 'sanity'
 
 export const settingsType = defineType({
   name: 'settings',
-  title: 'Site Settings',
+  title: 'Configuración del Sitio',
   type: 'document',
   fields: [
     defineField({
       name: 'siteName',
-      title: 'Site Name',
+      title: 'Nombre del Sitio',
       type: 'string',
     }),
     defineField({
       name: 'whatsapp',
-      title: 'WhatsApp Number',
-      description: 'Format: +569XXXXXXXX',
+      title: 'WhatsApp',
+      description: 'Formato: +569XXXXXXXX',
       type: 'string',
     }),
     defineField({
       name: 'phone',
-      title: 'Phone Number',
+      title: 'Teléfono',
       type: 'string',
     }),
     defineField({
       name: 'email',
-      title: 'Email Address',
+      title: 'Email',
       type: 'string',
     }),
     defineField({
       name: 'address',
-      title: 'Physical Address',
+      title: 'Dirección',
       type: 'string',
     }),
     defineField({
       name: 'instagram',
-      title: 'Instagram URL',
+      title: 'Instagram',
       type: 'url',
     }),
     defineField({
       name: 'schedule',
-      title: 'Opening Hours',
+      title: 'Horario',
       type: 'array',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'day', title: 'Day(s)', type: 'string' },
-            { name: 'hours', title: 'Hours', type: 'string' },
+            { name: 'day', title: 'Día', type: 'string' },
+            { name: 'hours', title: 'Horario', type: 'string' },
           ],
         },
       ],
     }),
     defineField({
       name: 'seo',
-      title: 'SEO Settings',
+      title: 'Configuración SEO',
       type: 'object',
       fields: [
-        { name: 'title', title: 'SEO Title', type: 'string' },
-        { name: 'description', title: 'Meta Description', type: 'text' },
+        { name: 'title', title: 'Título SEO', type: 'string' },
+        { name: 'description', title: 'Descripción Meta', type: 'text' },
       ],
     }),
   ],

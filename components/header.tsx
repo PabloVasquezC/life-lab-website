@@ -7,6 +7,17 @@ import { Menu, X, Phone, Instagram } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
+interface Settings {
+  siteName: string;
+  whatsapp: string;
+  phone: string;
+  email: string;
+  address: string;
+  instagram: string;
+  schedule: { day: string; hours: string }[];
+  seo: { title: string; description: string };
+}
+
 const navItems = [
   { name: "Inicio", href: "#inicio" },
   { name: "Servicios", href: "#servicios" },
@@ -14,7 +25,7 @@ const navItems = [
   { name: "Contacto", href: "#contacto" },
 ];
 
-export function Header() {
+export function Header({ settings }: { settings: Settings }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -25,6 +36,10 @@ export function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${settings?.whatsapp || "+56926219977"}&text=Hola!%20Quiero%20más%20información`;
+  const instagramLink = settings?.instagram || "https://www.instagram.com/centrolifelab/";
+  const siteName = settings?.siteName || "LIFE LAB";
 
   return (
     <motion.header
@@ -43,14 +58,14 @@ export function Header() {
             <div className="relative w-12 h-12">
               <Image
                 src="/images/lifelab-logo.png"
-                alt="Life Lab Logo"
+                alt={`${siteName} Logo`}
                 fill
                 className="object-contain rounded-full"
               />
             </div>
             <div className="flex flex-col">
               <span className="font-[var(--font-display)] text-xl tracking-wider text-foreground">
-                LIFE LAB
+                {siteName}
               </span>
               <span className="text-[10px] text-muted-foreground tracking-widest uppercase">
                 Centro de Entrenamiento
@@ -75,7 +90,7 @@ export function Header() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <Link
-              href="https://www.instagram.com/centrolifelab/"
+              href={instagramLink}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"
@@ -84,7 +99,7 @@ export function Header() {
             </Link>
             <Button asChild>
               <Link
-                href="https://api.whatsapp.com/send?phone=+56926219977&text=Hola!%20Quiero%20más%20información"
+                href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -139,7 +154,7 @@ export function Header() {
               >
                 <Button asChild className="w-full">
                   <Link
-                    href="https://api.whatsapp.com/send?phone=+56926219977&text=Hola!%20Quiero%20más%20información"
+                    href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -155,3 +170,4 @@ export function Header() {
     </motion.header>
   );
 }
+

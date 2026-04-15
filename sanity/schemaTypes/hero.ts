@@ -2,27 +2,27 @@ import { defineField, defineType } from 'sanity'
 
 export const heroType = defineType({
   name: 'hero',
-  title: 'Hero Section',
+  title: 'Hero',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Título',
       type: 'string',
     }),
     defineField({
       name: 'subtitle',
-      title: 'Subtitle',
+      title: 'Subtítulo',
       type: 'string',
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Descripción',
       type: 'text',
     }),
     defineField({
       name: 'backgroundImage',
-      title: 'Background Image',
+      title: 'Imagen de Fondo',
       type: 'image',
       options: {
         hotspot: true,
@@ -30,12 +30,12 @@ export const heroType = defineType({
     }),
     defineField({
       name: 'ctaText',
-      title: 'CTA Button Text',
+      title: 'Texto del botón CTA',
       type: 'string',
     }),
     defineField({
       name: 'ctaLink',
-      title: 'CTA Button Link',
+      title: 'Enlace del botón CTA',
       type: 'string',
     }),
   ],
