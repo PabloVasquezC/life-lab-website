@@ -1,0 +1,274 @@
+[
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Título"
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "title": "Subtítulo"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "title": "Descripción"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "backgroundImage",
+        "type": "image",
+        "title": "Imagen de Fondo"
+      },
+      {
+        "name": "ctaText",
+        "type": "string",
+        "title": "Texto del botón CTA"
+      },
+      {
+        "name": "ctaLink",
+        "type": "string",
+        "title": "Enlace del botón CTA"
+      }
+    ],
+    "name": "hero",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Título"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "title": "Descripción"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Imagen"
+      },
+      {
+        "description": "Nombre del icono de Lucide (ej. Dumbbell, Heart, Apple)",
+        "name": "icon",
+        "type": "string",
+        "title": "Icono"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "features",
+        "type": "array",
+        "title": "Características"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Orden"
+      }
+    ],
+    "name": "service",
+    "type": "document",
+    "title": "Servicios"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Título"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "title": "Descripción"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "icon",
+                "type": "string",
+                "title": "Icono"
+              },
+              {
+                "name": "value",
+                "type": "string",
+                "title": "Valor"
+              },
+              {
+                "name": "label",
+                "type": "string",
+                "title": "Etiqueta"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "stats",
+        "type": "array",
+        "title": "Estadísticas"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Título"
+              },
+              {
+                "name": "description",
+                "type": "text",
+                "title": "Descripción"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "values",
+        "type": "array",
+        "title": "Nuestros Valores"
+      }
+    ],
+    "name": "about",
+    "type": "document",
+    "title": "Sobre Nosotros"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Título"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Imagen"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Orden"
+      }
+    ],
+    "name": "gallery",
+    "type": "document",
+    "title": "Galería"
+  },
+  {
+    "fields": [
+      {
+        "name": "siteName",
+        "type": "string",
+        "title": "Nombre del Sitio"
+      },
+      {
+        "description": "Formato: +569XXXXXXXX",
+        "name": "whatsapp",
+        "type": "string",
+        "title": "WhatsApp"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "title": "Teléfono"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "name": "address",
+        "type": "string",
+        "title": "Dirección"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "name": "instagram",
+        "type": "url"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "day",
+                "type": "string",
+                "title": "Día"
+              },
+              {
+                "name": "hours",
+                "type": "string",
+                "title": "Horario"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "schedule",
+        "type": "array",
+        "title": "Horario"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": "Título SEO"
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "title": "Descripción Meta"
+          }
+        ],
+        "name": "seo",
+        "type": "object",
+        "title": "Configuración SEO"
+      }
+    ],
+    "name": "settings",
+    "type": "document",
+    "title": "Configuración del Sitio"
+  }
+]
