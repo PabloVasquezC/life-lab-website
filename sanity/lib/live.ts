@@ -4,14 +4,7 @@
 import { defineLive } from "next-sanity/live";
 import { client } from './client'
 
-const token = process.env.SANITY_API_TOKEN;
-
 export const { sanityFetch, SanityLive } = defineLive({
-  client: client.withConfig({ 
-    // Live content requires the CDN to be disabled
-    useCdn: false 
-  }),
-  serverToken: token,
-  browserToken: token,
+  client,
 });
 
